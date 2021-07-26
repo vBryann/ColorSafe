@@ -10,6 +10,8 @@
 		69735C0326AB05F40056DC6C /* ColorSafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69735BF926AB05F40056DC6C /* ColorSafe.framework */; };
 		69735C0826AB05F40056DC6C /* ColorSafeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69735C0726AB05F40056DC6C /* ColorSafeTests.m */; };
 		69735C0A26AB05F40056DC6C /* ColorSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = 69735BFC26AB05F40056DC6C /* ColorSafe.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		697AA4BC26AEE37200E16D33 /* Colors.h in Headers */ = {isa = PBXBuildFile; fileRef = 697AA4BB26AEE37200E16D33 /* Colors.h */; };
+		697AA4BE26AEE91500E16D33 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 697AA4BD26AEE91500E16D33 /* Colors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		69735C0226AB05F40056DC6C /* ColorSafeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorSafeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69735C0726AB05F40056DC6C /* ColorSafeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorSafeTests.m; sourceTree = "<group>"; };
 		69735C0926AB05F40056DC6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		697AA4BB26AEE37200E16D33 /* Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		697AA4BD26AEE91500E16D33 /* Colors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 			children = (
 				69735BFC26AB05F40056DC6C /* ColorSafe.h */,
 				69735BFD26AB05F40056DC6C /* Info.plist */,
+				697AA4BB26AEE37200E16D33 /* Colors.h */,
+				697AA4BD26AEE91500E16D33 /* Colors.m */,
 			);
 			path = ColorSafe;
 			sourceTree = "<group>";
@@ -93,6 +99,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				697AA4BC26AEE37200E16D33 /* Colors.h in Headers */,
 				69735C0A26AB05F40056DC6C /* ColorSafe.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				697AA4BE26AEE91500E16D33 /* Colors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

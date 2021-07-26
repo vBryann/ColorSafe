@@ -6,6 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
+//#import <ExampleKit/EKObject.h>
+//#import <ExampleKit/EKSession.h>
 
 //! Project version number for ColorSafe.
 FOUNDATION_EXPORT double ColorSafeVersionNumber;
