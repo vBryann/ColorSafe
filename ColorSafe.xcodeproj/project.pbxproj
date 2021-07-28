@@ -3,16 +3,30 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
+
+/* Begin PBXAggregateTarget section */
+		697AA4CC26B180C800E16D33 /* ColorSafe-Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 697AA4CD26B180C900E16D33 /* Build configuration list for PBXAggregateTarget "ColorSafe-Universal" */;
+			buildPhases = (
+				697AA4D026B1810C00E16D33 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "ColorSafe-Universal";
+			productName = "ColorSafe-Universal";
+		};
+/* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
 		69735C0326AB05F40056DC6C /* ColorSafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69735BF926AB05F40056DC6C /* ColorSafe.framework */; };
 		69735C0826AB05F40056DC6C /* ColorSafeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69735C0726AB05F40056DC6C /* ColorSafeTests.m */; };
-		69735C0A26AB05F40056DC6C /* ColorSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = 69735BFC26AB05F40056DC6C /* ColorSafe.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		697AA4BC26AEE37200E16D33 /* Colors.h in Headers */ = {isa = PBXBuildFile; fileRef = 697AA4BB26AEE37200E16D33 /* Colors.h */; };
+		69735C0A26AB05F40056DC6C /* ColorSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = 69735BFC26AB05F40056DC6C /* ColorSafe.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
+		697AA4BC26AEE37200E16D33 /* Colors.h in Headers */ = {isa = PBXBuildFile; fileRef = 697AA4BB26AEE37200E16D33 /* Colors.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
 		697AA4BE26AEE91500E16D33 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 697AA4BD26AEE91500E16D33 /* Colors.m */; };
-		697AA4C526B051F200E16D33 /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 697AA4C426B051F200E16D33 /* UIColor+HSB.h */; };
+		697AA4C526B051F200E16D33 /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 697AA4C426B051F200E16D33 /* UIColor+HSB.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
 		697AA4C726B052A500E16D33 /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = 697AA4C626B052A500E16D33 /* UIColor+HSB.m */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +178,9 @@
 					69735C0126AB05F40056DC6C = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
+					697AA4CC26B180C800E16D33 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 				};
 			};
 			buildConfigurationList = 69735BF326AB05F40056DC6C /* Build configuration list for PBXProject "ColorSafe" */;
@@ -181,6 +198,7 @@
 			targets = (
 				69735BF826AB05F40056DC6C /* ColorSafe */,
 				69735C0126AB05F40056DC6C /* ColorSafeTests */,
+				697AA4CC26B180C800E16D33 /* ColorSafe-Universal */,
 			);
 		};
 /* End PBXProject section */
@@ -201,6 +219,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		697AA4D026B1810C00E16D33 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"${PROJECT_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${PROJECT_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		69735BF526AB05F40056DC6C /* Sources */ = {
@@ -429,6 +467,24 @@
 			};
 			name = Release;
 		};
+		697AA4CE26B180C900E16D33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GHRBLV3RV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		697AA4CF26B180C900E16D33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GHRBLV3RV2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -455,6 +511,15 @@
 			buildConfigurations = (
 				69735C1126AB05F40056DC6C /* Debug */,
 				69735C1226AB05F40056DC6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		697AA4CD26B180C900E16D33 /* Build configuration list for PBXAggregateTarget "ColorSafe-Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				697AA4CE26B180C900E16D33 /* Debug */,
+				697AA4CF26B180C900E16D33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
