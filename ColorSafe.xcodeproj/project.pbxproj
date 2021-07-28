@@ -12,6 +12,8 @@
 		69735C0A26AB05F40056DC6C /* ColorSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = 69735BFC26AB05F40056DC6C /* ColorSafe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		697AA4BC26AEE37200E16D33 /* Colors.h in Headers */ = {isa = PBXBuildFile; fileRef = 697AA4BB26AEE37200E16D33 /* Colors.h */; };
 		697AA4BE26AEE91500E16D33 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 697AA4BD26AEE91500E16D33 /* Colors.m */; };
+		697AA4C526B051F200E16D33 /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 697AA4C426B051F200E16D33 /* UIColor+HSB.h */; };
+		697AA4C726B052A500E16D33 /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = 697AA4C626B052A500E16D33 /* UIColor+HSB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 		69735C0926AB05F40056DC6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		697AA4BB26AEE37200E16D33 /* Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		697AA4BD26AEE91500E16D33 /* Colors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		697AA4C426B051F200E16D33 /* UIColor+HSB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+HSB.h"; sourceTree = "<group>"; };
+		697AA4C626B052A500E16D33 /* UIColor+HSB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HSB.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 				69735BFD26AB05F40056DC6C /* Info.plist */,
 				697AA4BB26AEE37200E16D33 /* Colors.h */,
 				697AA4BD26AEE91500E16D33 /* Colors.m */,
+				697AA4C426B051F200E16D33 /* UIColor+HSB.h */,
+				697AA4C626B052A500E16D33 /* UIColor+HSB.m */,
 			);
 			path = ColorSafe;
 			sourceTree = "<group>";
@@ -100,6 +106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				697AA4BC26AEE37200E16D33 /* Colors.h in Headers */,
+				697AA4C526B051F200E16D33 /* UIColor+HSB.h in Headers */,
 				69735C0A26AB05F40056DC6C /* ColorSafe.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				697AA4BE26AEE91500E16D33 /* Colors.m in Sources */,
+				697AA4C726B052A500E16D33 /* UIColor+HSB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
