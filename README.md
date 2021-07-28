@@ -3,3 +3,6 @@ ColorSafe é um framework voltado para o desenvolvimento acessível para portado
 
 ### UIColorRGB
 Essa função consegue receber o código hexadecimal de uma cor e transformá-lo em RGB.
+
+### SafeColors
+Aqui, temos algumas sugestões de paletas de cores a serem usadas que não tem conflito quando usadas juntas, sendo distinguíveis por todos os tipos de daltonismo.
